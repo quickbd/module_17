@@ -69,21 +69,6 @@ model invoices{
   invoice_products invoice_products[]
  }
 
-model invoice_products{
-  id BigInt @id @default(autoincrement())   
-  invoice_id BigInt 
-  product_id BigInt
-  user_id BigInt 
-  qty String @db.VarChar(50)
-  sales_price String @db.VarChar(50) 
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @default(now()) @db.Timestamp(0) @updatedAt
-
-  invoices invoices @relation(fields: [invoice_id], references: [id] , onDelete:Restrict, onUpdate:Cascade )
-  users users @relation(fields: [user_id], references: [id] , onDelete:Restrict, onUpdate:Cascade)
-   products products @relation(fields: [product_id], references: [id] , onDelete:Restrict, onUpdate:Cascade)
-}
-
 
 model products{
   id BigInt @id @default(autoincrement())     
@@ -100,3 +85,19 @@ model products{
   categories categories @relation(fields: [category_id], references: [id] , onDelete:Restrict, onUpdate:Cascade)
   invoice_products invoice_products[]
 }
+
+model invoice_products{
+  id BigInt @id @default(autoincrement())   
+  invoice_id BigInt 
+  product_id BigInt
+  user_id BigInt 
+  qty String @db.VarChar(50)
+  sales_price String @db.VarChar(50) 
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0) @updatedAt
+
+  invoices invoices @relation(fields: [invoice_id], references: [id] , onDelete:Restrict, onUpdate:Cascade )
+  users users @relation(fields: [user_id], references: [id] , onDelete:Restrict, onUpdate:Cascade)
+   products products @relation(fields: [product_id], references: [id] , onDelete:Restrict, onUpdate:Cascade)
+}
+
